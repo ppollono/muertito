@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Muertito</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header id="header">
+      <h1>MUERTITO</h1>
+      <div id="turn-indicator">---</div>
+      <div>
+        <button id="btn-new-game" data-i18n="label_new_game">Nueva Partida</button>
+        <button id="btn-lang">🇬🇧</button>
+      </div>
+    </header>
+
+    <!-- MESSAGE BAR -->
+    <div id="message-bar"></div>
+
+    <!-- GAME BOARD -->
+    <div id="board">
+      <!-- CPU ZONE -->
+      <section id="cpu-zone" class="player-zone">
+        <div class="zone-label" data-i18n="label_cpu">CPU</div>
+        <div class="player-area">
+          <div class="area-group">
+            <div class="area-title">
+              <span data-i18n="label_dead">Muerto</span>
+              <span id="cpu-muerto-count" class="count-badge">26</span>
+            </div>
+            <div id="cpu-muerto" class="card-slot muerto-slot" data-player="cpu"></div>
+          </div>
+          <div class="area-group">
+            <div class="area-title" data-i18n="label_aux">Auxiliares</div>
+            <div class="aux-columns" id="cpu-aux">
+              <div class="aux-col-wrap">
+                <div
+                  class="card-stack aux-column"
+                  id="cpu-aux-0"
+                  data-player="cpu"
+                  data-index="0"
+                ></div>
+              </div>
+              <div class="aux-col-wrap">
+                <div
+                  class="card-stack aux-column"
+                  id="cpu-aux-1"
+                  data-player="cpu"
+                  data-index="1"
+                ></div>
+              </div>
+              <div class="aux-col-wrap">
+                <div
+                  class="card-stack aux-column"
+                  id="cpu-aux-2"
+                  data-player="cpu"
+                  data-index="2"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <div class="area-group">
+            <div class="area-title">
+              <span data-i18n="label_hand">Mano</span>
+              <span id="cpu-hand-count" class="count-badge">0</span>
+            </div>
+            <div id="cpu-hand" class="hand-area"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CENTER ZONE -->
+      <section id="center-zone">
+        <div class="center-row">
+          <div class="area-group">
+            <div class="area-title">
+              <span data-i18n="label_draw_pile">Mazo de Robo</span>
+              <span id="draw-pile-count" class="count-badge">52</span>
+            </div>
+            <div id="draw-pile" class="card-slot draw-slot">
+              <div class="card face-down"><span class="card-back-label">🂠</span></div>
+            </div>
+          </div>
+
+          <div class="area-group central-group">
+            <div class="area-title" data-i18n="label_central">Columnas Centrales</div>
+            <div class="central-columns">
+              <div class="central-col-wrap">
+                <div class="card-stack central-column" id="central-0" data-index="0"></div>
+              </div>
+              <div class="central-col-wrap">
+                <div class="card-stack central-column" id="central-1" data-index="1"></div>
+              </div>
+              <div class="central-col-wrap">
+                <div class="card-stack central-column" id="central-2" data-index="2"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- HUMAN ZONE -->
+      <section id="human-zone" class="player-zone">
+        <div class="zone-label" data-i18n="label_player">Tú</div>
+        <div class="player-area">
+          <div class="area-group">
+            <div class="area-title">
+              <span data-i18n="label_hand">Mano</span>
+              <span id="human-hand-count" class="count-badge">0</span>
+            </div>
+            <div id="human-hand" class="hand-area"></div>
+          </div>
+          <div class="area-group">
+            <div class="area-title" data-i18n="label_aux">Auxiliares</div>
+            <div class="aux-columns" id="human-aux">
+              <div class="aux-col-wrap">
+                <div
+                  class="card-stack aux-column"
+                  id="human-aux-0"
+                  data-player="human"
+                  data-index="0"
+                ></div>
+              </div>
+              <div class="aux-col-wrap">
+                <div
+                  class="card-stack aux-column"
+                  id="human-aux-1"
+                  data-player="human"
+                  data-index="1"
+                ></div>
+              </div>
+              <div class="aux-col-wrap">
+                <div
+                  class="card-stack aux-column"
+                  id="human-aux-2"
+                  data-player="human"
+                  data-index="2"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <div class="area-group">
+            <div class="area-title">
+              <span data-i18n="label_dead">Muerto</span>
+              <span id="human-muerto-count" class="count-badge">26</span>
+            </div>
+            <div id="human-muerto" class="card-slot muerto-slot" data-player="human"></div>
+          </div>
+        </div>
+        <div id="action-bar">
+          <button id="btn-end-turn" class="btn-action" disabled data-i18n="btn_end_turn">
+            Pasar Turno
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!-- WIN OVERLAY -->
+    <div id="win-overlay" class="hidden">
+      <div id="win-box">
+        <div id="win-title">¡GANASTE!</div>
+        <div id="win-subtitle"></div>
+        <button id="btn-play-again" data-i18n="label_play_again">Jugar de nuevo</button>
+      </div>
+    </div>
+
+    <!-- JS: locale data must load before i18n.js -->
+    <script src="locales/es.js"></script>
+    <script src="locales/en.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/deck.js"></script>
+    <script src="js/rules.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/ai.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/interaction.js"></script>
+    <script src="js/game.js"></script>
+  </body>
+</html>
